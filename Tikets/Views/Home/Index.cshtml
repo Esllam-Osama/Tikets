@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@model Tikets.Fetaures.PaginationResult<Movie>
+
+<div class="mt-4">
+    <div class="row">
+        @foreach (var m in Model.Items)
+        {
+            <div class="col-md-3 my-3 rounded">
+                <div class="card movie-card">
+                    <img src="~/images/movies/@m.ImgUrl" class="card-img-top" alt="Movie Image">
+                    <div class="card-body" style="position: relative; height: 300px;">
+
+                        <h5 class="card-title">@m.Name</h5>
+                        <p class="card-text price">Price: @m.Price</p>
+                        <p class="card-text cinema"></p>
+                        <a href="#" class="btn btn-primary w-75" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">احجز الآن</a>
+                    </div>
+
+                </div>
+            </div>
+        }
+    <div class="w-75 mx-auto d-flex justify-content-center mt-4">
+        <nav>
+            <ul class="pagination ">
+                
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    </div>
+</div>
+<style>
+    .movie-card {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+        height: 380px;
+        box-shadow: 0px 0px 14.5px #0000008c;
+        transition: transform 0.5s ease;
+    }
+
+        .movie-card:hover {
+            transform: translateY(-5px);
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        .movie-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .movie-card .card-body {
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+
+        .movie-card .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .movie-card .price,
+        .movie-card .cinema {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .movie-card .btn {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+            .movie-card .btn:hover {
+                background-color: #0056b3;
+            }
+</style>
+@section Tost {
+    <script>
+        $(document).ready(function () {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "hideMethod": "fadeOut"
+            };
+
+            // استخدام شرط Razor للتحقق من ViewBag.error
+        @if (ViewBag.error != null)
+        {
+            <text>
+                    toastr["error"]("@ViewBag.error");
+            </text>
+        }
+                });
+    </script>
+}
+
