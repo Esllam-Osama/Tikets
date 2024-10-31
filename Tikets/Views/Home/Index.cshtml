@@ -130,8 +130,28 @@
         color: #0a58ca;
         background-color: #b7babd;
         border-color: #b7babd;
-        cursor: not-allowed
+        cursor: default
     }
+
+    .active-p:hover {
+        z-index: 2;
+        color: #0a58ca;
+        background-color: #b7babd;
+        border-color: #b7babd;
+    }
+    .active-p:active{
+        z-index:initial;
+        outline:initial !important;
+        box-shadow:initial !important;
+            background-color: #b7babd !important;
+    }
+
+        .active-p:focus{
+            z-index: initial;
+            outline: initial !important;
+            box-shadow: initial !important;
+            background-color: #b7babd !important;
+        }
 </style>
 @section Tost {
     <script>
