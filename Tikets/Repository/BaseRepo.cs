@@ -11,12 +11,10 @@ namespace Tikets.Repository
         {
             _context = context;
         }
-        public List<T> GetAll(int pageNum = 1)
+        public List<T> GetAll()
         {
             int pageSize = 12;
             var items = _context.Set<T>()
-                .Skip((pageNum-1) * pageSize)
-                .Take(pageSize)
                 .ToList();
             return items;
         }
