@@ -8,13 +8,9 @@ namespace Tikets.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         IMovieRepo movies;
-
-
-        public HomeController(ILogger<HomeController> logger ,IMovieRepo movies)
+        public HomeController(IMovieRepo movies)
         {
-            _logger = logger;
             this.movies = movies;
         }
 

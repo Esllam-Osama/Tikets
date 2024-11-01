@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Tikets.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="w-50 mx-auto text-center shadow py-2 px-4 rounded-2 border mb-4"><h1>All Categories</h1></div>
+<table class="table table-striped">
+    <thead >
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Movies Count</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                    @item.Movies.Count()
+            </td>
+                <td><a href="#" class="btn btn-primary">Go <i class="fa-solid fa-arrow-right"></i></a></td>
+        </tr>
+}
+    </tbody>
+</table>

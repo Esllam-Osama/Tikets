@@ -10,7 +10,7 @@ namespace Tikets.Repository
         public MovieRepo(ApplicationDbContext context) : base(context) { }
         public PaginationResult<Movie> GetAllWithPagination(int pageNumber)
         {
-            var allItems = GetAll(); 
+            var allItems = GetAll(["Category", "Cinema"]); 
             var totalItems = allItems.Count();
             var items = allItems.Skip((pageNumber - 1) * 12).Take(12).ToList();
 

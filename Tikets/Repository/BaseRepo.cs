@@ -1,4 +1,5 @@
-﻿using Tikets.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Tikets.Data;
 using Tikets.Models;
 using Tikets.Repository.IRepository;
 
@@ -11,11 +12,21 @@ namespace Tikets.Repository
         {
             _context = context;
         }
-        public List<T> GetAll()
+        public List<T> GetAll(string[]? includes = null)
         {
-            int pageSize = 12;
-            var items = _context.Set<T>()
-                .ToList();
+            
+
+            var query = _context.Set<T>().AsQueryable();
+
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+
+            var items = query.ToList();
             return items;
         }
     }
