@@ -15,7 +15,7 @@ namespace Tikets.Repository
             _context = context;
             _model = _context.Set<T>();
         }
-        public List<T> GetAll(Expression < Func<T, object> >[]? includes)
+        public List<T> GetAll(Expression < Func<T, bool> >[]? includes)
         {
             var query= _model.AsQueryable();
             if (includes !=null && includes.Length>0) {
