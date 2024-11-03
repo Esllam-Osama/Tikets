@@ -36,7 +36,20 @@ namespace Tikets.Controllers
             TempData["errors"] = "Movie Not Found";
             return RedirectToAction("Index");
         }
-
+        public IActionResult GetMoviesInCategory(int categoryId, int pageNum=1) {
+            var items = movies.GetAll([e => e.Cinema, e=>e.Category],e=>e.CategoryId==categoryId);
+            var totalPage = (int)Math.Ceiling(items.Count() / (double)12);
+            if (pageNum <= 0 || pageNum > totalPage)
+            {
+                ViewBag.error = $"Page Number Must be Bigger Than Zero and smaller than {totalPage + 1}";
+                pageNum = 1;
+            }
+            if (items.Count() < 1) {
+                TempData["errors"] = $"Not Found movies";
+                return Redirect("/Category/Index");
+            }
+            return View(new PaginationResult<Movie>(items.Skip((pageNum - 1) * 12).Take(12).ToList(), pageNum, totalPage));
+        }
 
         public IActionResult Error()
         {

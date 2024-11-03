@@ -24,8 +24,38 @@
             <td>
                     @item.Movies.Count()
             </td>
-                <td><a href="#" class="btn btn-primary">Go <i class="fa-solid fa-arrow-right"></i></a></td>
+                <td><a href="/Home/GetMoviesInCategory/?categoryId=@item.Id" class="btn btn-primary">Go <i class="fa-solid fa-arrow-right"></i></a></td>
         </tr>
 }
     </tbody>
 </table>
+@section Tost {
+    <script>
+        $(document).ready(function () {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "hideMethod": "fadeOut"
+            };
+
+            // استخدام شرط Razor للتحقق من ViewBag.error
+        @if (TempData["errors"] != null)
+        {
+            <text>
+                    toastr["error"]("@TempData["errors"]");
+            </text>
+        }
+                });
+    </script>
+}
