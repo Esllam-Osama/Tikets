@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Details Page";
+}
+@model Movie
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <img src="~/images/movies/@Model.ImgUrl" class="img-fluid w-75 " alt="" style="max-height: 500px;">
+        </div>
+        <div class="col-md-6 d-flex align-items-center">
+            <div>
+                <h3 class="text-dark">@Model.Name</h3>
+                <p class="text-secondary">Category: <strong>@Model.Category.Name</strong></p>
+                <p class="text-secondary">Cinema: <strong>@Model.Cinema.Name</strong></p>
+                <p class="text-secondary">Price: <strong>@Model.Price</strong></p>
+                <p class="mt-2 text-secondary">@Model.Description</p>
+                <a href="#" class="btn btn-primary mt-3">احجز الآن</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa; /* لون الخلفية */
+    }
+
+    .img-fluid {
+        height: auto;
+        max-height: 500px;
+        box-shadow:0rem 0rem 2rem black;
+        border-radius:2rem;
+    }
+
+    h1 {
+        color: #007bff; /* لون أزرق */
+    }
+
+    .text-secondary {
+        color: #6c757d; /* لون رمادي */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* لون أزرق */
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* لون أزرق داكن عند التمرير */
+            border-color: #0056b3;
+        }
+</style>
+

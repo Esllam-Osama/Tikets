@@ -11,10 +11,10 @@ namespace Tikets.Controllers
         {
             this.Categories = Categories;
         }
-        // GET: CategoryController
+        //GET: CategoryController
         public ActionResult Index()
         {
-            return View(Categories.GetAll(["Movies"]).ToList());
+            return View(Categories.GetAll([e=>e.Movies]));
         }
     }
 }

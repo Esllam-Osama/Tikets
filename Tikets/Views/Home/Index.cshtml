@@ -8,14 +8,14 @@
 <div class="mt-4">
     <div class="row">
         <div class="w-100 mx-auto d-flex justify-content-center mt-3">
-            <nav>
+             <nav>
                 <ul class="pagination ">
                     @for (int i = 1; i <= Model.PagesNumber; i++)
                     {
                         if (i == Model.PageNumber)
                         {
                             <li class="page-item">
-                                <a class="page-link active-p" onclick="handleClick(event)" href="/Home/Index?pageNumer=@i">
+                                <a class="page-link active-p" onclick="handleClick(event)" href="/Home/Index?pageNum=@i">
                                     @i
                                 </a>
                             </li>
@@ -23,7 +23,7 @@
                         else
                         {
                             <li class="page-item">
-                                <a class="page-link" href="/Home/Index?pageNumer=@i">
+                                <a class="page-link" href="/Home/Index?pageNum=@i">
                                     @i
                                 </a>
                             </li>
@@ -43,7 +43,7 @@
                         <p class="card-text cinema">Category: @m.Category.Name</p>
                         <p class="card-text cinema">Cinema: @m.Cinema.Name</p>
                         <p class="card-text price mt-auto">Price: @m.Price</p>
-                        <a href="#" class="btn btn-primary w-75" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">احجز الآن</a>
+                        <a href="/Home/Details/?id=@m.Id" class="btn btn-primary w-75" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">Some Details</a>
                     </div>
 
                 </div>
@@ -57,7 +57,7 @@
                         if (i == Model.PageNumber)
                         {
                             <li class="page-item">
-                                <a class="page-link active-p" onclick="handleClick(event)" href="/Home/Index?pageNumer=@i">
+                                <a class="page-link active-p" onclick="handleClick(event)" href="/Home/Index?pageNum=@i">
                                     @i
                                 </a>
                             </li>
@@ -65,14 +65,14 @@
                         else
                         {
                             <li class="page-item">
-                                <a class="page-link" href="/Home/Index?pageNumer=@i">
+                                <a class="page-link" href="/Home/Index?pageNum=@i">
                                     @i
                                 </a>
                             </li>
                         }
                     }
                 </ul>
-            </nav>
+            </nav> 
         </div>
     </div>
 
@@ -181,7 +181,13 @@
                     toastr["error"]("@ViewBag.error");
             </text>
         }
-  });
+        @if (TempData["errors"] != null)
+        {
+            <text>
+                    toastr["error"]("@TempData["errors"]");
+            </text>
+        }
+        });
         function handleClick(e) {
             e.preventDefault();
         }

@@ -5,19 +5,11 @@ using Tikets.Fetaures;
 
 namespace Tikets.Repository
 {
-    public class MovieRepo :BaseRepo<Movie> , IMovieRepo
+    public class MovieRepo : BaseRepo<Movie>, IMovieRepo
     {
-        public MovieRepo(ApplicationDbContext context) : base(context) { }
-        public PaginationResult<Movie> GetAllWithPagination(int pageNumber)
-        {
-            var allItems = GetAll(["Category", "Cinema"]); 
-            var totalItems = allItems.Count();
-            var items = allItems.Skip((pageNumber - 1) * 12).Take(12).ToList();
-
-            int pages = (int)Math.Ceiling(totalItems / 12.0);
-            return new PaginationResult<Movie>(items, pageNumber , pages);
+        ApplicationDbContext _context;
+        public MovieRepo(ApplicationDbContext context) : base(context) {
+        this._context = context;
         }
-
     }
-
 }
