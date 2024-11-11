@@ -4,9 +4,12 @@ using Tikets.Models;
 using Tikets.Repository;
 using Tikets.Fetaures;
 using Tikets.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using Tikets.Utility;
 
 namespace Tikets.Controllers
 {
+    [Authorize(Roles =$"{StaticData.Admin},{StaticData.User}")]
     public class HomeController : Controller
     {
         IMovieRepo movies;

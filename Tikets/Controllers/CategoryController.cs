@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tikets.Repository.IRepository;
+using Tikets.Utility;
 
 namespace Tikets.Controllers
 {
+    [Authorize(Roles = $"{StaticData.Admin},{StaticData.User}")]
     public class CategoryController : Controller
     {
         ICategoryRepo Categories;

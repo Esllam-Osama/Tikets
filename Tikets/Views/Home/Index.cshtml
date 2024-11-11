@@ -187,6 +187,18 @@
                     toastr["error"]("@TempData["errors"]");
             </text>
         }
+        @if (TempData["logedIn"] != null )
+        {
+            <text>
+                    toastr["success"]("@TempData["logedIn"]");
+            </text>
+        }
+        @if (TempData["CreatedAdmin"] != null)
+        {
+            <text>
+                    toastr["success"]("@TempData["CreatedAdmin"]");
+            </text>
+        }
         });
         function handleClick(e) {
             e.preventDefault();
