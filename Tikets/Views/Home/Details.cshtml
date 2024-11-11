@@ -4,7 +4,26 @@
 @model Movie
 <div class="container my-5">
     <div class="row">
-        <div class="col-md-6 d-flex align-items-center justify-content-center">
+        <div class="col-md-6 d-flex align-items-center justify-content-center position-relative">
+            <a href="#Trailer" class="position-absolute p-0" style="top:88%; right:50; right:15%">
+                <i class="fa-brands fa-youtube btn btn-danger fs-1" style="border-radius:40%;"></i></a>
+            @if (Model.MovieStatus == MovieStatus.Expired)
+            {
+                <p class="bg-danger position-absolute px-2 rounded text-light" style="top:3%;left:17%">@Model.MovieStatus</p>
+            }
+            else if (Model.MovieStatus == MovieStatus.Upcoming)
+            {
+                <p class="bg-warning position-absolute px-2 rounded text-light" style="top:3%;left:17%">
+                    @Model.MovieStatus
+                </p>
+            }
+            else
+
+            {
+                <p class="bg-success position-absolute px-2 rounded text-light" style="top:3%;left:17%">
+                    @Model.MovieStatus
+                </p>
+            }
             <img src="~/images/movies/@Model.ImgUrl" class="img-fluid w-75 " alt="" style="max-height: 500px;">
         </div>
         <div class="col-md-6 d-flex align-items-center">
@@ -14,7 +33,8 @@
                 <p class="text-secondary">Cinema: <strong>@Model.Cinema.Name</strong></p>
                 <p class="text-secondary">Price: <strong>@Model.Price</strong></p>
                 <p class="mt-2 text-secondary">@Model.Description</p>
-                <p class="mt-2 text-secondary">Actores: @foreach (var m in Model.ActorMovies)
+                <p class="mt-2 text-secondary">
+                    Actores: @foreach (var m in Model.ActorMovies)
                     {
                         <img src="~/images/cast/@m.Actor.PorfilePicture" class="ms-2" />
                     }
@@ -22,6 +42,17 @@
                 <a href="#" class="btn btn-primary mt-3">احجز الآن</a>
             </div>
         </div>
+    </div>
+    <hr class="my-5" />
+    <div class="w-50 mx-auto text-center shadow py-2 px-4 rounded-2 border mb-4"><h1 class="text-dark">Trailer</h1></div>
+    <div class="d-flex justify-content-center mt-5 rounded" id="Trailer">
+        <iframe width="640" height="360" style=" box-shadow: 0rem 0rem 2rem black;"
+                src="https://www.youtube.com/embed/@Model.TrailerUrl"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+        </iframe>
+
     </div>
 </div>
 
@@ -33,8 +64,8 @@
     .img-fluid {
         height: auto;
         max-height: 500px;
-        box-shadow:0rem 0rem 2rem black;
-        border-radius:2rem;
+        box-shadow: 0rem 0rem 2rem black;
+        border-radius: 2rem;
     }
 
     h1 {

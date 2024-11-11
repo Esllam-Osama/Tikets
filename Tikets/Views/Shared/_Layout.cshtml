@@ -41,8 +41,18 @@
                                             <ul class="dropdown-menu dropdown-menu-light text-dark" style="right:0 !important; left:unset;">
                                                 @if (User.IsInRole(StaticData.Admin))
                                                 {
-                                                    <li><a class="dropdown-item" href="/Account/CreateNewAdmin"><i class="fa-solid fa-user-plus"></i> 
-                                                        Create Admin</a></li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="/Account/CreateNewAdmin">
+                                                            <i class="fa-solid fa-gear fa-spin"></i> 
+                                                             DashBord
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="/Account/CreateNewAdmin">
+                                                            <i class="fa-solid fa-user-plus"></i>
+                                                            Create Admin
+                                                        </a>
+                                                    </li>
                                                 }
                                                 <hr />
                                                 <li><a class="dropdown-item text-danger" href="/Account/LogOut"><i class="fa-solid fa-arrow-right-from-bracket"></i> 

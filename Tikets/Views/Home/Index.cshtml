@@ -35,12 +35,29 @@
         @foreach (var m in Model.Items)
         {
             <div class="col-md-3 my-3 rounded">
-                <div class="card movie-card">
+                <div class="card movie-card class=" position-relative"">
+                    @if (m.MovieStatus == MovieStatus.Expired)
+                    {
+                        <p class="bg-danger position-absolute px-2 rounded text-light" style="top:2%;left:2%;">@m.MovieStatus</p>
+                    }else if (m.MovieStatus == MovieStatus.Upcoming)
+                    {
+                        <p class="bg-warning position-absolute px-2 rounded text-light" style="top:2%;left:2%">
+                            @m.MovieStatus
+                        </p>
+                    }
+                    else
+
+                    {
+                        <p class="bg-success position-absolute px-2 rounded text-light" style="top:2%;left:2%">
+                            @m.MovieStatus
+                        </p>
+                    }
                     <img src="~/images/movies/@m.ImgUrl" class="card-img-top" alt="Movie Image">
                     <div class="card-body" style="position: relative; height: 300px;">
 
                         <h5 class="card-title">@m.Name</h5>
-                        <div>
+                        <div >
+                            
                             <p class="card-text d-inline-block cinema">Actors: </p>
                             @if (m.ActorMovies != null && m.ActorMovies.Any())
                             {
@@ -57,6 +74,7 @@
                         </div>
                         <p class="card-text cinema">Category: @m.Category.Name</p>
                         <p class="card-text cinema">Cinema: @m.Cinema.Name</p>
+                        
                         <p class="card-text price mt-auto">Price: @m.Price</p>
                         <a href="/Home/Details/?id=@m.Id" class="btn btn-primary w-75" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">Some Details</a>
                     </div>
