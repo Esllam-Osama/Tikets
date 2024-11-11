@@ -16,5 +16,6 @@
         public int CategoryId { get; set; }
         public Cinema Cinema { get; set; }
         public Category Category { get; set; }
+        public ICollection<ActorMovie> ActorMovies { get; set; }
     }
 }

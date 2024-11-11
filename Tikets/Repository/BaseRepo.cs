@@ -16,7 +16,9 @@ namespace Tikets.Repository
             _context = context;
             _model = _context.Set<T>();
         }
-        public IEnumerable<T> GetAll(Expression < Func<T, object> >[]? includes=null, Expression<Func<T, bool>>? expression=null)
+        public IEnumerable<T> GetAll(Expression<Func<T, object>>[]? includes = null,
+            Expression<Func<T, bool>>? expression = null,
+            Func<IQueryable<T>, IQueryable<T>>? additionalIncludes = null)
         {
             var query= _model.AsQueryable();
             if (includes !=null && includes.Length>0) {
@@ -29,9 +31,15 @@ namespace Tikets.Repository
             {
                 query = query.Where(expression);
             }
+            if (additionalIncludes != null)
+            {
+                query = additionalIncludes(query);
+            }
             return query;
         }
-        public T? GetOne(Expression<Func<T, bool>> expression , Expression<Func<T, object>>[]? includes = null) {
+        public T? GetOne(Expression<Func<T, bool>> expression , Expression<Func<T, object>>[]? includes = null
+            ,
+            Func<IQueryable<T>, IQueryable<T>>? additionalIncludes = null) {
             var query = _model.AsQueryable();
             if (query != null) {
                 if (includes != null && includes.Length>0)
@@ -41,6 +49,10 @@ namespace Tikets.Repository
                         query=query.Include(include);
                     }
                 }
+            if (additionalIncludes != null)
+            {
+                query = additionalIncludes(query);
+            }
             }
             return query?.FirstOrDefault(expression);
         }

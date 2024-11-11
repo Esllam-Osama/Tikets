@@ -40,6 +40,21 @@
                     <div class="card-body" style="position: relative; height: 300px;">
 
                         <h5 class="card-title">@m.Name</h5>
+                        <div>
+                            <p class="card-text d-inline-block cinema">Actors: </p>
+                            @if (m.ActorMovies != null && m.ActorMovies.Any())
+                            {
+                                @foreach (var actorMovie in m.ActorMovies)
+                                {
+                                        <img src="~/images/cast/@actorMovie.Actor.PorfilePicture" style="width:50px; border-radius:50%;height:50px;" />
+                                }
+                            }
+                            else
+                            {
+                                <p class="d-inline-block">No actors available.</p>
+                            }
+
+                        </div>
                         <p class="card-text cinema">Category: @m.Category.Name</p>
                         <p class="card-text cinema">Cinema: @m.Cinema.Name</p>
                         <p class="card-text price mt-auto">Price: @m.Price</p>
@@ -83,7 +98,7 @@
         overflow: hidden;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s;
-        height: 440px;
+        height: 540px;
         box-shadow: 0px 0px 14.5px #0000008c;
         transition: transform 0.5s ease;
     }

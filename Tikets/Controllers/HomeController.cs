@@ -6,6 +6,7 @@ using Tikets.Fetaures;
 using Tikets.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Tikets.Utility;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tikets.Controllers
 {
@@ -20,7 +21,8 @@ namespace Tikets.Controllers
 
         public IActionResult Index(int pageNum = 1)
         {
-            var items = movies.GetAll(includes: [e => e.Category, e => e.Cinema]);
+            var items = movies.GetAll(includes: [e => e.Category, e => e.Cinema],
+                additionalIncludes:e=>e.Include(e=>e.ActorMovies).ThenInclude(am=>am.Actor));
             var totalPage = (int)Math.Ceiling(items.Count() / (double)12);
             if (pageNum <= 0 || pageNum > totalPage)
             {
@@ -31,7 +33,7 @@ namespace Tikets.Controllers
         }
         public IActionResult Details(int id)
         {
-            var movie = movies.GetOne(e => e.Id == id, includes: [e=>e.Category , e=>e.Cinema]);
+            var movie = movies.GetOne(e => e.Id == id, includes: [e=>e.Category , e=>e.Cinema], additionalIncludes: e => e.Include(e => e.ActorMovies).ThenInclude(am => am.Actor));
             if (movie != null)
             {
                 return View(movie);

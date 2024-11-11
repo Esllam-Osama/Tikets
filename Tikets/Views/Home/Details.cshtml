@@ -14,6 +14,11 @@
                 <p class="text-secondary">Cinema: <strong>@Model.Cinema.Name</strong></p>
                 <p class="text-secondary">Price: <strong>@Model.Price</strong></p>
                 <p class="mt-2 text-secondary">@Model.Description</p>
+                <p class="mt-2 text-secondary">Actores: @foreach (var m in Model.ActorMovies)
+                    {
+                        <img src="~/images/cast/@m.Actor.PorfilePicture" class="ms-2" />
+                    }
+                </p>
                 <a href="#" class="btn btn-primary mt-3">احجز الآن</a>
             </div>
         </div>
