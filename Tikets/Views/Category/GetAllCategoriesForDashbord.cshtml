@@ -1,0 +1,72 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Tikets.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="w-50 mx-auto text-center shadow py-2 px-4 rounded-2 border mb-4"><h1>All Categories</h1></div>
+<table class="table table-striped">
+    <thead class="text-center">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Movies Count</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody class="text-center border">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @item.Movies.Count()
+                </td>
+                <td>
+                    <a href="/Home/GetMoviesInCategory/?categoryId=@item.Id" class="btn btn-success mx-2">Go <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="/Home/GetMoviesInCategory/?categoryId=@item.Id" class="btn btn-primary mx-2">Eddit <i class="fa-solid fa-pen"></i> </a>
+                    <a href="/Home/GetMoviesInCategory/?categoryId=@item.Id" class="btn btn-danger mx-2">Delete <i class="fa-regular fa-trash-can"></i> </a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Tost {
+    <script>
+        $(document).ready(function () {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "hideMethod": "fadeOut"
+            };
+
+            // استخدام شرط Razor للتحقق من ViewBag.error
+        @if (TempData["errors"] != null)
+        {
+            <text>
+                    toastr["error"]("@TempData["errors"]");
+            </text>
+        }
+                                            });
+    </script>
+}

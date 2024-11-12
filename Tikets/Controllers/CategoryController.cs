@@ -19,5 +19,11 @@ namespace Tikets.Controllers
         {
             return View(Categories.GetAll([e=>e.Movies]));
         }
+        [Authorize(Roles =$"{StaticData.Admin}")]
+        public IActionResult GetAllCategoriesForDashbord()
+        {
+            var categories = Categories.GetAll(includes: [e=>e.Movies]).ToList();
+            return View(categories);
+        }
     }
 }

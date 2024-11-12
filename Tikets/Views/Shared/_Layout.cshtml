@@ -41,12 +41,7 @@
                                             <ul class="dropdown-menu dropdown-menu-light text-dark" style="right:0 !important; left:unset;">
                                                 @if (User.IsInRole(StaticData.Admin))
                                                 {
-                                                    <li>
-                                                        <a class="dropdown-item" href="/Account/CreateNewAdmin">
-                                                            <i class="fa-solid fa-gear fa-spin"></i> 
-                                                             DashBord
-                                                        </a>
-                                                    </li>
+                                                    
                                                     <li>
                                                         <a class="dropdown-item" href="/Account/CreateNewAdmin">
                                                             <i class="fa-solid fa-user-plus"></i>
@@ -80,6 +75,82 @@
         </nav>
     </header>
     <div class="container">
+        @* dashbord *@
+
+        @if (User.IsInRole(StaticData.Admin))
+        {
+
+
+            <!-- الشريط الجانبي -->
+            <div id="sidebar" class="border shadow">
+                <!-- زر فتح/إغلاق الشريط الجانبي -->
+                <button id="sidebarToggle" class="btn position-absolute border btn-light" style="box-shadow: 0 0 0 0.1rem white, 0 0 0 0.10rem #e5e8eb;">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="sidebar-content">
+                    <div class="text-center"><h4>Dashbord</h4></div>
+                    <ul class="list-unstyled mt-4">
+
+
+                        <li><a href="/Category/GetAllCategoriesForDashbord" class="text-decoration-none btn w-100 text-start  bg-li fw-bold text-dark"><i class="fa-solid fa-list me-2"></i>Categories</a></li>
+                        <li><a href="#" class="text-white">الرابط 3</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- محتوى الصفحة -->
+
+
+            <script>
+                // جافا سكريبت لفتح وإغلاق الشريط الجانبي
+                document.getElementById('sidebarToggle').onclick = function () {
+                    document.getElementById('sidebar').classList.toggle('active');
+                };
+            </script>
+            <style scoped>
+                /* إعدادات الشريط الجانبي */
+                #sidebar {
+                    z-index: 10000;
+                    height: 81vh;
+                    width: 250px;
+                    position: fixed;
+                    top: 9%;
+                    left: -250px; /* يبدأ مخفي */
+                    background-color: white; /* اللون الأزرق */
+                    transition: left 0.3s;
+                }
+
+                    /* عند فتح الشريط */
+                    #sidebar.active {
+                        left: 0;
+                    }
+
+                /* زر الفتح */
+                #sidebarToggle {
+                    position: fixed;
+                    right: 20px;
+                    z-index: 1001;
+                    right: -43px;
+                    top: 0%;
+                    width: 17%
+                }
+
+                /* محتوى الشريط الجانبي */
+                .sidebar-content {
+                    color: black;
+                    padding: 15px;
+                }
+
+                button.dropdown-toggle.margin-arrow::after {
+                    margin-left: 5rem;
+                }
+
+                .bg-li {
+                    background-color: #5c5c5c33
+                }
+            </style>
+        }
+        @* dashbord *@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
